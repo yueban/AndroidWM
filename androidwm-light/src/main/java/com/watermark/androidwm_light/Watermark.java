@@ -44,24 +44,26 @@ import static com.watermark.androidwm_light.utils.BitmapUtils.textAsBitmap;
  */
 public class Watermark {
     private WatermarkText watermarkText;
+
     private WatermarkImage watermarkImg;
+
     private Bitmap backgroundImg;
+
     private Context context;
+
     private Bitmap outputImage;
+
     private Bitmap canvasBitmap;
+
     private boolean isTileMode;
 
     /**
      * Constructors for WatermarkImage
      */
     @SuppressWarnings("PMD")
-    Watermark(@NonNull Context context,
-              @NonNull Bitmap backgroundImg,
-              @Nullable WatermarkImage watermarkImg,
-              @Nullable List<WatermarkImage> wmBitmapList,
-              @Nullable WatermarkText inputText,
-              @Nullable List<WatermarkText> wmTextList,
-              boolean isTileMode) {
+    Watermark(@NonNull Context context, @NonNull Bitmap backgroundImg, @Nullable WatermarkImage watermarkImg,
+        @Nullable List<WatermarkImage> wmBitmapList, @Nullable WatermarkText inputText, @Nullable List<WatermarkText> wmTextList,
+        boolean isTileMode) {
 
         this.context = context;
         this.isTileMode = isTileMode;
@@ -77,7 +79,6 @@ public class Watermark {
         createWatermarkText(watermarkText);
         createWatermarkTexts(wmTextList);
     }
-
 
     /**
      * interface for getting the watermark bitmap.
@@ -105,25 +106,21 @@ public class Watermark {
         if (watermarkImg != null && backgroundImg != null) {
             Paint watermarkPaint = new Paint();
             watermarkPaint.setAlpha(watermarkImg.getAlpha());
-            Bitmap newBitmap = Bitmap.createBitmap(backgroundImg.getWidth(),
-                    backgroundImg.getHeight(), backgroundImg.getConfig());
+            Bitmap newBitmap =
+                Bitmap.createBitmap(backgroundImg.getWidth(), backgroundImg.getHeight(), backgroundImg.getConfig());
             Canvas watermarkCanvas = new Canvas(newBitmap);
             watermarkCanvas.drawBitmap(canvasBitmap, 0, 0, null);
             Bitmap scaledWMBitmap = resizeBitmap(watermarkImg.getImage(), (float) watermarkImg.getSize(), backgroundImg);
-            scaledWMBitmap = adjustPhotoRotation(scaledWMBitmap,
-                    (int) watermarkImg.getPosition().getRotation());
+            scaledWMBitmap = adjustPhotoRotation(scaledWMBitmap, (int) watermarkImg.getPosition().getRotation());
 
             if (isTileMode) {
-                watermarkPaint.setShader(new BitmapShader(scaledWMBitmap,
-                        Shader.TileMode.REPEAT,
-                        Shader.TileMode.REPEAT));
+                watermarkPaint.setShader(new BitmapShader(scaledWMBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT));
                 Rect bitmapShaderRect = watermarkCanvas.getClipBounds();
                 watermarkCanvas.drawRect(bitmapShaderRect, watermarkPaint);
             } else {
                 watermarkCanvas.drawBitmap(scaledWMBitmap,
-                        (float) watermarkImg.getPosition().getPositionX() * backgroundImg.getWidth(),
-                        (float) watermarkImg.getPosition().getPositionY() * backgroundImg.getHeight(),
-                        watermarkPaint);
+                    (float) watermarkImg.getPosition().getPositionX() * backgroundImg.getWidth(),
+                    (float) watermarkImg.getPosition().getPositionY() * backgroundImg.getHeight(), watermarkPaint);
             }
 
             canvasBitmap = newBitmap;
@@ -152,25 +149,21 @@ public class Watermark {
         if (watermarkText != null && backgroundImg != null) {
             Paint watermarkPaint = new Paint();
             watermarkPaint.setAlpha(watermarkText.getTextAlpha());
-            Bitmap newBitmap = Bitmap.createBitmap(backgroundImg.getWidth(),
-                    backgroundImg.getHeight(), backgroundImg.getConfig());
+            Bitmap newBitmap =
+                Bitmap.createBitmap(backgroundImg.getWidth(), backgroundImg.getHeight(), backgroundImg.getConfig());
             Canvas watermarkCanvas = new Canvas(newBitmap);
             watermarkCanvas.drawBitmap(canvasBitmap, 0, 0, null);
             Bitmap scaledWMBitmap = textAsBitmap(context, watermarkText);
-            scaledWMBitmap = adjustPhotoRotation(scaledWMBitmap,
-                    (int) watermarkText.getPosition().getRotation());
+            scaledWMBitmap = adjustPhotoRotation(scaledWMBitmap, (int) watermarkText.getPosition().getRotation());
 
             if (isTileMode) {
-                watermarkPaint.setShader(new BitmapShader(scaledWMBitmap,
-                        Shader.TileMode.REPEAT,
-                        Shader.TileMode.REPEAT));
+                watermarkPaint.setShader(new BitmapShader(scaledWMBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT));
                 Rect bitmapShaderRect = watermarkCanvas.getClipBounds();
                 watermarkCanvas.drawRect(bitmapShaderRect, watermarkPaint);
             } else {
                 watermarkCanvas.drawBitmap(scaledWMBitmap,
-                        (float) watermarkText.getPosition().getPositionX() * backgroundImg.getWidth(),
-                        (float) watermarkText.getPosition().getPositionY() * backgroundImg.getHeight(),
-                        watermarkPaint);
+                    (float) watermarkText.getPosition().getPositionX() * backgroundImg.getWidth(),
+                    (float) watermarkText.getPosition().getPositionY() * backgroundImg.getHeight(), watermarkPaint);
             }
 
             canvasBitmap = newBitmap;
@@ -182,7 +175,6 @@ public class Watermark {
      * Creating the composite image with {@link WatermarkText}.
      * The input of the method is a set of {@link WatermarkText}s.
      */
-
     private void createWatermarkTexts(List<WatermarkText> watermarkTexts) {
         if (watermarkTexts != null) {
             for (int i = 0; i < watermarkTexts.size(); i++) {
@@ -228,10 +220,7 @@ public class Watermark {
      */
     private Bitmap adjustPhotoRotation(Bitmap bitmap, final int orientationAngle) {
         Matrix matrix = new Matrix();
-        matrix.setRotate(orientationAngle,
-                (float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2);
-        return Bitmap.createBitmap(bitmap,
-                0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        matrix.setRotate(orientationAngle, (float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
-
 }

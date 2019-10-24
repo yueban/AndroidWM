@@ -19,8 +19,8 @@ package com.watermark.androidwm_light.sample;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,14 +38,18 @@ import com.watermark.androidwm_light.bean.WatermarkText;
  * @since 29/08/2018
  */
 public class MainActivity extends AppCompatActivity {
-
     private Button btnAddText;
+
     private Button btnAddImg;
+
     private Button btnClear;
+
     private Button btnSingleText;
+
     private Button btnSingleImg;
 
     private ImageView backgroundView;
+
     private Bitmap watermarkBitmap;
 
     private EditText editText;
@@ -68,81 +72,68 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText);
         backgroundView = findViewById(R.id.imageView);
 
-        watermarkBitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.test_watermark);
-
+        watermarkBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test_watermark);
     }
 
     private void initEvents() {
         // The sample method of adding a text watermark.
         btnAddText.setOnClickListener((View v) -> {
-            WatermarkText watermarkText = new WatermarkText(editText.getText().toString())
-                    .setPositionX(0.5)
-                    .setPositionY(0.5)
-                    .setTextAlpha(255)
-                    .setTextColor(Color.WHITE)
-                    .setTextFont(R.font.champagne)
-                    .setTextShadow(0.1f, 5, 5, Color.BLUE);
+            WatermarkText watermarkText = new WatermarkText(editText.getText().toString()).setPositionX(0.5)
+                .setPositionY(0.5)
+                .setTextAlpha(255)
+                .setTextColor(Color.WHITE)
+                .setTextFont(R.font.champagne)
+                .setTextShadow(0.1f, 5, 5, Color.BLUE);
 
             WatermarkBuilder.create(this, backgroundView)
-                    .setTileMode(true)
-                    .loadWatermarkText(watermarkText)
-                    .getWatermark()
-                    .setToImageView(backgroundView);
+                .setTileMode(true)
+                .loadWatermarkText(watermarkText)
+                .getWatermark()
+                .setToImageView(backgroundView);
         });
 
         btnSingleText.setOnClickListener((View v) -> {
-            WatermarkText watermarkText = new WatermarkText(editText.getText().toString())
-                    .setPositionX(Math.random())
-                    .setPositionY(Math.random())
-                    .setTextAlpha(255)
-                    .setTextColor(Color.WHITE)
-                    .setTextFont(R.font.champagne)
-                    .setTextShadow(0.1f, 5, 5, Color.BLUE);
+            WatermarkText watermarkText = new WatermarkText(editText.getText().toString()).setPositionX(Math.random())
+                .setPositionY(Math.random())
+                .setTextAlpha(255)
+                .setTextColor(Color.WHITE)
+                .setTextFont(R.font.champagne)
+                .setTextShadow(0.1f, 5, 5, Color.BLUE);
 
             WatermarkBuilder.create(this, backgroundView)
-                    .loadWatermarkText(watermarkText)
-                    .getWatermark()
-                    .setToImageView(backgroundView);
+                .loadWatermarkText(watermarkText)
+                .getWatermark()
+                .setToImageView(backgroundView);
         });
 
         // The sample method of adding an image watermark.
         btnAddImg.setOnClickListener((View v) -> {
             // Math.random()
-            WatermarkImage watermarkImage = new WatermarkImage(watermarkBitmap)
-                    .setImageAlpha(80)
-                    .setRotation(15)
-                    .setSize(0.2);
+            WatermarkImage watermarkImage = new WatermarkImage(watermarkBitmap).setImageAlpha(80).setRotation(15).setSize(0.2);
 
-            WatermarkBuilder
-                    .create(this, backgroundView)
-                    .loadWatermarkImage(watermarkImage)
-                    .setTileMode(true)
-                    .getWatermark()
-                    .setToImageView(backgroundView);
-
+            WatermarkBuilder.create(this, backgroundView)
+                .loadWatermarkImage(watermarkImage)
+                .setTileMode(true)
+                .getWatermark()
+                .setToImageView(backgroundView);
         });
 
         btnSingleImg.setOnClickListener((View v) -> {
-            WatermarkImage watermarkImage = new WatermarkImage(watermarkBitmap)
-                    .setImageAlpha(80)
-                    .setPositionX(Math.random())
-                    .setPositionY(Math.random())
-                    .setRotation(15)
-                    .setSize(0.2);
+            WatermarkImage watermarkImage = new WatermarkImage(watermarkBitmap).setImageAlpha(80)
+                .setPositionX(Math.random())
+                .setPositionY(Math.random())
+                .setRotation(15)
+                .setSize(0.2);
 
-            WatermarkBuilder
-                    .create(this, backgroundView)
-                    .loadWatermarkImage(watermarkImage)
-                    .getWatermark()
-                    .setToImageView(backgroundView);
+            WatermarkBuilder.create(this, backgroundView)
+                .loadWatermarkImage(watermarkImage)
+                .getWatermark()
+                .setToImageView(backgroundView);
         });
 
         // reload the background.
         btnClear.setOnClickListener((View v) -> {
-            Glide.with(this).load(R.drawable.test)
-                    .into(backgroundView);
+            Glide.with(this).load(R.drawable.test).into(backgroundView);
         });
-
     }
 }

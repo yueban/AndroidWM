@@ -47,7 +47,6 @@ import timber.log.Timber;
  * @author huangyz0918
  */
 public class BitmapUtils {
-
     /**
      * build a bitmap from a text.
      *
@@ -63,17 +62,14 @@ public class BitmapUtils {
         }
 
         float value = (float) watermarkText.getTextSize();
-        int pixel = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                value, context.getResources().getDisplayMetrics());
+        int pixel =
+            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
         watermarkPaint.setTextSize(pixel);
 
-        if (watermarkText.getTextShadowBlurRadius() != 0
-                || watermarkText.getTextShadowXOffset() != 0
-                || watermarkText.getTextShadowYOffset() != 0) {
-            watermarkPaint.setShadowLayer(watermarkText.getTextShadowBlurRadius(),
-                    watermarkText.getTextShadowXOffset(),
-                    watermarkText.getTextShadowYOffset(),
-                    watermarkText.getTextShadowColor());
+        if (watermarkText.getTextShadowBlurRadius() != 0 || watermarkText.getTextShadowXOffset() != 0 ||
+            watermarkText.getTextShadowYOffset() != 0) {
+            watermarkPaint.setShadowLayer(watermarkText.getTextShadowBlurRadius(), watermarkText.getTextShadowXOffset(),
+                watermarkText.getTextShadowYOffset(), watermarkText.getTextShadowColor());
         }
 
         if (watermarkText.getTextFont() != 0) {
@@ -87,18 +83,17 @@ public class BitmapUtils {
 
         float baseline = (int) (-watermarkPaint.ascent() + 1f);
         Rect bounds = new Rect();
-        watermarkPaint.getTextBounds(watermarkText.getText(),
-                0, watermarkText.getText().length(), bounds);
+        watermarkPaint.getTextBounds(watermarkText.getText(), 0, watermarkText.getText().length(), bounds);
 
         int boundWidth = bounds.width() + 20;
         int mTextMaxWidth = (int) watermarkPaint.measureText(watermarkText.getText());
         if (boundWidth > mTextMaxWidth) {
             boundWidth = mTextMaxWidth;
         }
-        StaticLayout staticLayout = new StaticLayout(watermarkText.getText(),
-                0, watermarkText.getText().length(),
-                watermarkPaint, mTextMaxWidth, android.text.Layout.Alignment.ALIGN_NORMAL, 2.0f,
-                2.0f, false);
+
+        StaticLayout staticLayout =
+            new StaticLayout(watermarkText.getText(), 0, watermarkText.getText().length(), watermarkPaint, mTextMaxWidth,
+                android.text.Layout.Alignment.ALIGN_NORMAL, 2.0f, 2.0f, false);
 
         int lineCount = staticLayout.getLineCount();
         int height = (int) (baseline + watermarkPaint.descent() + 3) * lineCount;
@@ -126,8 +121,7 @@ public class BitmapUtils {
         float scale = (backgroundImg.getWidth() * size) / bitmapWidth;
         Matrix matrix = new Matrix();
         matrix.postScale(scale, scale);
-        return Bitmap.createBitmap(watermarkImg, 0, 0,
-                bitmapWidth, bitmapHeight, matrix, true);
+        return Bitmap.createBitmap(watermarkImg, 0, 0, bitmapWidth, bitmapHeight, matrix, true);
     }
 
     /**
@@ -140,7 +134,7 @@ public class BitmapUtils {
         }
 
         @SuppressLint("SimpleDateFormat") String timeStamp =
-                new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US).format(Calendar.getInstance().getTime());
+            new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US).format(Calendar.getInstance().getTime());
 
         FileOutputStream out = null;
         try {
@@ -163,5 +157,4 @@ public class BitmapUtils {
             }
         }
     }
-
 }
