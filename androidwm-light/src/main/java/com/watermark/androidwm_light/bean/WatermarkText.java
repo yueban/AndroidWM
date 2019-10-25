@@ -16,7 +16,6 @@
  */
 package com.watermark.androidwm_light.bean;
 
-
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
@@ -31,24 +30,38 @@ import android.widget.TextView;
  * @since 29/08/2018
  */
 public class WatermarkText {
-
     private String text;
+
     private int alpha = 50;
+
     private double size = 20;
+
     @ColorInt
     private int color = Color.BLACK;
+
     @ColorInt
     private int backgroundColor = Color.TRANSPARENT;
+
     private Paint.Style style = Paint.Style.FILL;
+
     @FontRes
     private int typeFaceId = 0;
+
     private float textShadowBlurRadius;
+
     private float textShadowXOffset;
+
     private float textShadowYOffset;
+
     @ColorInt
     private int textShadowColor = Color.WHITE;
+
     // set the default values for the position.
     private WatermarkPosition position = new WatermarkPosition(0, 0, 0);
+
+    private float spacingWidth = 0;
+
+    private float spacingHeight = 0;
 
     /**
      * Constructors for WatermarkText
@@ -183,12 +196,30 @@ public class WatermarkText {
     /**
      * Set the shadow of the text watermark.
      */
-    public WatermarkText setTextShadow(final float blurRadius, final float shadowXOffset,
-                                       final float shadowYOffset, @ColorInt final int shadowColor) {
+    public WatermarkText setTextShadow(final float blurRadius, final float shadowXOffset, final float shadowYOffset,
+        @ColorInt final int shadowColor) {
         this.textShadowBlurRadius = blurRadius;
         this.textShadowXOffset = shadowXOffset;
         this.textShadowYOffset = shadowYOffset;
         this.textShadowColor = shadowColor;
+        return this;
+    }
+
+    public float getSpacingWidth() {
+        return spacingWidth;
+    }
+
+    public WatermarkText setSpacingWidth(float spacingWidth) {
+        this.spacingWidth = spacingWidth;
+        return this;
+    }
+
+    public float getSpacingHeight() {
+        return spacingHeight;
+    }
+
+    public WatermarkText setSpacingHeight(float spacingHeight) {
+        this.spacingHeight = spacingHeight;
         return this;
     }
 
@@ -209,5 +240,4 @@ public class WatermarkText {
     private void textFromEditText(EditText editText) {
         this.text = editText.getText().toString();
     }
-
 }

@@ -99,11 +99,14 @@ public class BitmapUtils {
         int height = (int) (baseline + watermarkPaint.descent() + 3) * lineCount;
         Bitmap image = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         if (boundWidth > 0 && height > 0) {
-            image = Bitmap.createBitmap(boundWidth, height, Bitmap.Config.ARGB_8888);
+            image = Bitmap.createBitmap((int) (boundWidth + watermarkText.getSpacingWidth()),
+                (int) (height + watermarkText.getSpacingHeight()), Bitmap.Config.ARGB_8888);
         }
         Canvas canvas = new Canvas(image);
         canvas.drawColor(watermarkText.getBackgroundColor());
+        canvas.translate(watermarkText.getSpacingWidth() / 2, watermarkText.getSpacingHeight() / 2);
         staticLayout.draw(canvas);
+
         return image;
     }
 

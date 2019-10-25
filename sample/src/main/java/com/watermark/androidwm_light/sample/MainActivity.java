@@ -83,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 .setTextAlpha(255)
                 .setTextColor(Color.WHITE)
                 .setTextFont(R.font.champagne)
-                .setTextShadow(0.1f, 5, 5, Color.BLUE);
+                .setTextShadow(0.1f, 5, 5, Color.BLUE)
+                .setSpacingWidth(80)
+                .setSpacingHeight(30);
 
             WatermarkBuilder.create(this, backgroundView)
                 .setTileMode(true)
