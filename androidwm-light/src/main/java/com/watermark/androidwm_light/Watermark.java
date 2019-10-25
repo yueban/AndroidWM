@@ -43,19 +43,23 @@ import static com.watermark.androidwm_light.utils.BitmapUtils.textAsBitmap;
  * @author huangyz0918 (huangyz0918@gmail.com)
  */
 public class Watermark {
-    private WatermarkText watermarkText;
+    private final WatermarkText watermarkText;
 
-    private WatermarkImage watermarkImg;
+    private final WatermarkImage watermarkImg;
 
-    private Bitmap backgroundImg;
+    private final Bitmap backgroundImg;
 
-    private Context context;
+    private final Context context;
+
+    private final boolean isTileMode;
+
+    private final float tileModeTranslationX;
+
+    private final float tileModeTranslationY;
 
     private Bitmap outputImage;
 
     private Bitmap canvasBitmap;
-
-    private boolean isTileMode;
 
     /**
      * Constructors for WatermarkImage
@@ -63,7 +67,7 @@ public class Watermark {
     @SuppressWarnings("PMD")
     Watermark(@NonNull Context context, @NonNull Bitmap backgroundImg, @Nullable WatermarkImage watermarkImg,
         @Nullable List<WatermarkImage> wmBitmapList, @Nullable WatermarkText inputText, @Nullable List<WatermarkText> wmTextList,
-        boolean isTileMode) {
+        boolean isTileMode, float tileModeTranslationX, float tileModeTranslationY) {
 
         this.context = context;
         this.isTileMode = isTileMode;
@@ -73,6 +77,8 @@ public class Watermark {
 
         canvasBitmap = backgroundImg;
         outputImage = backgroundImg;
+        this.tileModeTranslationX = tileModeTranslationX;
+        this.tileModeTranslationY = tileModeTranslationY;
 
         createWatermarkImage(watermarkImg);
         createWatermarkImages(wmBitmapList);
@@ -158,8 +164,10 @@ public class Watermark {
 
             if (isTileMode) {
                 watermarkPaint.setShader(new BitmapShader(scaledWMBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT));
+                watermarkCanvas.translate(-tileModeTranslationX, -tileModeTranslationY);
                 Rect bitmapShaderRect = watermarkCanvas.getClipBounds();
                 watermarkCanvas.drawRect(bitmapShaderRect, watermarkPaint);
+                watermarkCanvas.translate(tileModeTranslationX, tileModeTranslationY);
             } else {
                 watermarkCanvas.drawBitmap(scaledWMBitmap,
                     (float) watermarkText.getPosition().getPositionX() * backgroundImg.getWidth(),

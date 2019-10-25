@@ -38,12 +38,21 @@ import java.util.List;
  */
 public final class WatermarkBuilder {
     private Context context;
+
     private Bitmap backgroundImg;
+
     private boolean isTileMode = false;
 
+    private float tileModeTranslationX = 0;
+
+    private float tileModeTranslationY = 0;
+
     private WatermarkImage watermarkImage;
+
     private WatermarkText watermarkText;
+
     private List<WatermarkText> watermarkTexts = new ArrayList<>();
+
     private List<WatermarkImage> watermarkBitmaps = new ArrayList<>();
 
     /**
@@ -118,8 +127,7 @@ public final class WatermarkBuilder {
      * @param position  The position in the background image.
      * @return This {@link WatermarkBuilder}.
      */
-    public WatermarkBuilder loadWatermarkText(@NonNull String inputText,
-                                              @NonNull WatermarkPosition position) {
+    public WatermarkBuilder loadWatermarkText(@NonNull String inputText, @NonNull WatermarkPosition position) {
         watermarkText = new WatermarkText(inputText, position);
         return this;
     }
@@ -171,8 +179,7 @@ public final class WatermarkBuilder {
      * @param wmImg    The bitmap to add into.
      * @return This {@link WatermarkBuilder}.
      */
-    public WatermarkBuilder loadWatermarkImage(@NonNull Bitmap wmImg,
-                                               @NonNull WatermarkPosition position) {
+    public WatermarkBuilder loadWatermarkImage(@NonNull Bitmap wmImg, @NonNull WatermarkPosition position) {
         watermarkImage = new WatermarkImage(wmImg, position);
         return this;
     }
@@ -211,6 +218,16 @@ public final class WatermarkBuilder {
         return this;
     }
 
+    public WatermarkBuilder setTileModeTranslationX(float tileModeTranslationX) {
+        this.tileModeTranslationX = tileModeTranslationX;
+        return this;
+    }
+
+    public WatermarkBuilder setTileModeTranslationY(float tileModeTranslationY) {
+        this.tileModeTranslationY = tileModeTranslationY;
+        return this;
+    }
+
     /**
      * load a bitmap as background image from a ImageView.
      *
@@ -230,14 +247,7 @@ public final class WatermarkBuilder {
      * @return a new {@link Watermark} object
      */
     public Watermark getWatermark() {
-        return new Watermark(
-                context,
-                backgroundImg,
-                watermarkImage,
-                watermarkBitmaps,
-                watermarkText,
-                watermarkTexts,
-                isTileMode
-        );
+        return new Watermark(context, backgroundImg, watermarkImage, watermarkBitmaps, watermarkText, watermarkTexts, isTileMode,
+            tileModeTranslationX, tileModeTranslationY);
     }
 }

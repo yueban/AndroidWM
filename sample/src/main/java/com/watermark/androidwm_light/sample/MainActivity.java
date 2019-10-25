@@ -84,11 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 .setTextColor(Color.WHITE)
                 .setTextFont(R.font.champagne)
                 .setTextShadow(0.1f, 5, 5, Color.BLUE)
+                .setRotation(30)
                 .setSpacingWidth(80)
                 .setSpacingHeight(30);
 
             WatermarkBuilder.create(this, backgroundView)
                 .setTileMode(true)
+                .setTileModeTranslationX(200)
+                .setTileModeTranslationY(200)
                 .loadWatermarkText(watermarkText)
                 .getWatermark()
                 .setToImageView(backgroundView);
