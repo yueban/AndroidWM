@@ -34,7 +34,7 @@ public class WatermarkText {
 
     private int alpha = 50;
 
-    private double size = 20;
+    private float size = 20;
 
     @ColorInt
     private int color = Color.BLACK;
@@ -111,14 +111,14 @@ public class WatermarkText {
         return this;
     }
 
-    public double getTextSize() {
+    public float getTextSize() {
         return size;
     }
 
     /**
-     * @param size can be set to normal text size.
+     * @param size in pixels value.
      */
-    public WatermarkText setTextSize(double size) {
+    public WatermarkText setTextSize(float size) {
         this.size = size;
         return this;
     }

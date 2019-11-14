@@ -28,7 +28,6 @@ import android.os.Environment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.util.TypedValue;
 
 import com.watermark.androidwm_light.bean.WatermarkImage;
 import com.watermark.androidwm_light.bean.WatermarkText;
@@ -61,10 +60,7 @@ public class BitmapUtils {
             watermarkPaint.setAlpha(watermarkText.getTextAlpha());
         }
 
-        float value = (float) watermarkText.getTextSize();
-        int pixel =
-            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
-        watermarkPaint.setTextSize(pixel);
+        watermarkPaint.setTextSize(watermarkText.getTextSize());
 
         if (watermarkText.getTextShadowBlurRadius() != 0 || watermarkText.getTextShadowXOffset() != 0 ||
             watermarkText.getTextShadowYOffset() != 0) {
