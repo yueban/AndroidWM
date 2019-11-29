@@ -24,8 +24,10 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.res.ResourcesCompat;
+import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 
@@ -71,11 +73,19 @@ public class BitmapUtils {
         if (watermarkText.getTextFont() != 0) {
             Typeface typeface = ResourcesCompat.getFont(context, watermarkText.getTextFont());
             watermarkPaint.setTypeface(typeface);
+        } else {
+            watermarkPaint.setTypeface(Typeface.DEFAULT);
+        }
+        if (watermarkText.getTextFontStyle() != Typeface.NORMAL) {
+            watermarkPaint.setTypeface(Typeface.create(watermarkPaint.getTypeface(), watermarkText.getTextFontStyle()));
         }
 
         watermarkPaint.setAntiAlias(true);
         watermarkPaint.setTextAlign(Paint.Align.LEFT);
         watermarkPaint.setStrokeWidth(5);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            watermarkPaint.setLetterSpacing(watermarkText.getTextLetterSpacingMultiply());
+        }
 
         float baseline = (int) (-watermarkPaint.ascent() + 1f);
         Rect bounds = new Rect();
@@ -89,7 +99,7 @@ public class BitmapUtils {
 
         StaticLayout staticLayout =
             new StaticLayout(watermarkText.getText(), 0, watermarkText.getText().length(), watermarkPaint, mTextMaxWidth,
-                android.text.Layout.Alignment.ALIGN_NORMAL, 2.0f, 2.0f, false);
+                Layout.Alignment.ALIGN_NORMAL, 2.0f, 2.0f, false);
 
         int lineCount = staticLayout.getLineCount();
         int height = (int) (baseline + watermarkPaint.descent() + 3) * lineCount;

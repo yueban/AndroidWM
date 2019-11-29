@@ -18,8 +18,11 @@ package com.watermark.androidwm_light.bean;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FontRes;
+import android.support.annotation.RequiresApi;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -62,6 +65,10 @@ public class WatermarkText {
     private float spacingWidth = 0;
 
     private float spacingHeight = 0;
+
+    private int textFontStyle = Typeface.NORMAL;
+
+    private float textLetterSpacingMultiply = 0;
 
     /**
      * Constructors for WatermarkText
@@ -220,6 +227,26 @@ public class WatermarkText {
 
     public WatermarkText setSpacingHeight(float spacingHeight) {
         this.spacingHeight = spacingHeight;
+        return this;
+    }
+
+    public int getTextFontStyle() {
+        return textFontStyle;
+    }
+
+    public WatermarkText setTextFontStyle(int textFontStyle) {
+        this.textFontStyle = textFontStyle;
+        return this;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public float getTextLetterSpacingMultiply() {
+        return textLetterSpacingMultiply;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public WatermarkText setTextLetterSpacingMultiply(float textLetterSpacingMultiply) {
+        this.textLetterSpacingMultiply = textLetterSpacingMultiply;
         return this;
     }
 

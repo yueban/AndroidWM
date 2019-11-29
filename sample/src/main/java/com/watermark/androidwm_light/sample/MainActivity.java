@@ -19,6 +19,7 @@ package com.watermark.androidwm_light.sample;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -82,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
                 .setPositionY(0.5)
                 .setTextAlpha(255)
                 .setTextColor(Color.WHITE)
+                .setTextSize(40)
                 .setTextFont(R.font.champagne)
                 .setTextShadow(0.1f, 5, 5, Color.BLUE)
+                .setTextFontStyle(Typeface.BOLD)
+                .setTextLetterSpacingMultiply(0.3f)
                 .setRotation(30)
                 .setSpacingWidth(80)
                 .setSpacingHeight(30);
