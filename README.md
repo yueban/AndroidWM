@@ -1,5 +1,5 @@
 # AndroidWM
-[ ![Download](https://api.bintray.com/packages/huangyz0918/androidwm/androidwm/images/download.svg) ](https://bintray.com/huangyz0918/androidwm/androidwm/_latestVersion) [![Build Status](https://travis-ci.org/huangyz0918/AndroidWM.svg?branch=master)](https://travis-ci.org/huangyz0918/AndroidWM) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7f8e55520309410a95f71b54cfe8c381)](https://app.codacy.com/app/huangyz0918/AndroidWM?utm_source=github.com&utm_medium=referral&utm_content=huangyz0918/AndroidWM&utm_campaign=Badge_Grade_Dashboard) ![progress](https://img.shields.io/badge/progress-developing-yellow.svg)
+[![](https://jitpack.io/v/yueban/AndroidWM.svg)](https://jitpack.io/#yueban/AndroidWM)
 
 A lightweight android image watermark library that supports encrypted watermarks. [中文版本](./README-CN.md)
 
@@ -11,26 +11,19 @@ A lightweight android image watermark library that supports encrypted watermarks
 
 ### Gradle:
 
+### Gradle:
+
 ```gradle
-implementation 'com.huangyz0918:androidwm:0.2.2'
-```
-### Maven:
-
-```xml
-<dependency>
-  <groupId>com.huangyz0918</groupId>
-  <artifactId>androidwm</artifactId>
-  <version>0.2.2</version>
-  <type>pom</type>
-</dependency>
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
-### Lvy:
-
-```xml
-<dependency org='com.huangyz0918' name='androidwm' rev='0.2.2'>
-  <artifact name='androidwm' ext='pom' ></artifact>
-</dependency>
+```gradle
+implementation 'com.github.yueban:AndroidWM:0.1.5'
 ```
 
 # Quick Start
