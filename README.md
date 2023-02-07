@@ -23,7 +23,7 @@ allprojects {
 ```
 
 ```gradle
-implementation 'com.github.yueban:AndroidWM:0.1.5'
+implementation 'com.github.yueban:AndroidWM:0.2.0'
 ```
 
 # Quick Start
