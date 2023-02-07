@@ -30,28 +30,7 @@ subprojects { project ->
 
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
-            options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation'
-        }
-    }
-
-    task pmd(type: Pmd) {
-        ignoreFailures = false
-        ruleSetFiles = files("${project.rootDir}/config/pmd-ruleset.xml")
-        ruleSets = []
-
-        source 'src'
-        include '**/*.java'
-        exclude '**/gen/**'
-
-        reports {
-            xml.enabled = false
-            html.enabled = true
-            xml {
-                destination "$project.buildDir/reports/pmd/pmd.xml"
-            }
-            html {
-                destination "$project.buildDir/reports/pmd/pmd.html"
-            }
+            options.compilerArgs << '-Xlint:unchecked'
         }
     }
 }
@@ -61,13 +40,10 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.android.tools.build:gradle:7.3.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -76,8 +52,8 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
-        jcenter()
     }
 }
 
