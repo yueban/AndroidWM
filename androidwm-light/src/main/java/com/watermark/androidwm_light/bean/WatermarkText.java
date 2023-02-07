@@ -20,11 +20,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.FontRes;
-import android.support.annotation.RequiresApi;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.FontRes;
+import androidx.annotation.RequiresApi;
 
 /**
  * It's a wrapper of the watermark text.
@@ -204,7 +205,7 @@ public class WatermarkText {
      * Set the shadow of the text watermark.
      */
     public WatermarkText setTextShadow(final float blurRadius, final float shadowXOffset, final float shadowYOffset,
-        @ColorInt final int shadowColor) {
+                                       @ColorInt final int shadowColor) {
         this.textShadowBlurRadius = blurRadius;
         this.textShadowXOffset = shadowXOffset;
         this.textShadowYOffset = shadowYOffset;

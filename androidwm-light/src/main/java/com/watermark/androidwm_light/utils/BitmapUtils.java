@@ -26,7 +26,6 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.content.res.ResourcesCompat;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -40,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import androidx.core.content.res.ResourcesCompat;
 import timber.log.Timber;
 
 /**
